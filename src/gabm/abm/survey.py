@@ -55,6 +55,24 @@ class Question():
     def __repr__(self):
         return self.__str__()
 
+    def get_prompt(self) -> str:
+        """
+        Get the LLM prompt for the question - the text and available answers.
+        Returns:
+            A string representation of the question context.
+        """
+        question_text = "I am asked: " + self.text
+        question_text += ". I can choose from the following options: "
+        answer_texts = [answer.text for answer in self.answers]
+        return f"{question_text}{', '.join(answer_texts)}. What do I choose?"
+
+    def add_answer(self, answer: Answer):
+        """
+        Add an answer to the question.
+        Args:
+            answer: The Answer instance to add.
+        """
+        self.answers.append(answer)
 
 class AnswerID():
     """
@@ -90,24 +108,20 @@ class Answer():
     Attributes:
         id (AnswerID): The id of the Answer
         question_id (QuestionID): The question identifier.
-        text.
+        text (str): The answer text.
         answers (List[Answer]): List of available Answers.
     """
-    def __init__(self, answer_id: AnswerID, question_id: QuestionID, text: str:
+    def __init__(self, answer_id: AnswerID, question_id: QuestionID, text: str):
         """
         Initialize
         Args:
-            answer_id
-
+            answer_id The unique identifier for the answer.
+            question_id The unique identifier for the question this answer belongs to.
+            text The text of the answer.
         """
-        self.id = question_id
+        self.id = answer_id
+        self.question_id = question_id
         self.text = text
-        self.options = options or []
-
-
-
-
-
 
 class Survey:
     """
@@ -139,14 +153,29 @@ class SurveyConversation:
     """
     Handles a conversation between a Person (with a Profile/Persona) and an LLM for survey response simulation.
     Attributes:
-        person_profile (Dict[str, Any]): The profile/persona of the person.
+        person (Person): The person instance.
         survey (Survey): The survey to be conducted.
-        llm (Any): The LLM model interface (to be implemented).
+        llm_service (LLMService): The LLM service interface (to be implemented).
+        api_key (str): The API key for the LLM service.
+        model (str): The model to use for the LLM service.
+        responses (List[str]): The list of responses from the LLM for each question.
     """
-    def __init__(self, person_profile: Dict[str, Any], survey: Survey, llm: Any):
-        self.person_profile = person_profile
+    def __init__(self, person: Person, survey: Survey, llm_service: LLMService,
+            api_key: str = None, model: str = None):
+        """
+        Initialize
+        Args:
+            person: The Person instance.
+            survey: The Survey instance.
+            llm_service: The LLMService instance.
+            api_key: The API key for the LLM service (optional, can be set via environment variable).
+            model: The model to use for the LLM service (optional, can be determined by
+        """
+        self.person = person
         self.survey = survey
-        self.llm = llm
+        self.llm_service = llm_service
+        self.api_key = api_key or llm_service.get_api_key()
+        self.model = model or llm_service.get_default_model()
         self.responses = []
 
     def conduct(self):
@@ -154,9 +183,10 @@ class SurveyConversation:
         Conducts the survey by asking each question to the LLM with the given profile context.
         Stores responses in self.responses.
         """
+        person_profile = self.person.profile
         for question in self.survey.questions:
-            context = self._build_context(question)
-            response = self.llm.ask(context)
+            context = person_profile + " " + question.text  # In a real implementation, this would include more context about the person and the question
+            response = self.llm_service.send(context, model=self.model, api_key=self.api_key)
             self.responses.append(response)
 
     def _build_context(self, question: Question) -> Dict[str, Any]:
