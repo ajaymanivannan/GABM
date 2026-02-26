@@ -6,9 +6,13 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
+# Standard library imports
+import logging
 from typing import List, Dict, Any
+# Local imports
+from gabm.core.id import BaseID
 
-class QuestionID():
+class QuestionID(BaseID):
     """
     A unique identifier for a Question instance.
     Attributes:
@@ -20,21 +24,7 @@ class QuestionID():
         Args:
             question_id: The unique identifier for the question.
         """
-        self.id = question_id
-
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"QuestionID({self.id})"
-
-    def __repr__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return self.__str__()
+        super().__init__(question_id)
 
 class Question():
     """
@@ -74,7 +64,7 @@ class Question():
         """
         self.answers.append(answer)
 
-class AnswerID():
+class AnswerID(BaseID):
     """
     A unique identifier for a Answer instance.
     Attributes:
@@ -86,21 +76,7 @@ class AnswerID():
         Args:
             answer_id: The unique identifier for the answer.
         """
-        self.id = answer_id
-
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"AnswerID({self.id})"
-
-    def __repr__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return self.__str__()
+        super().__init__(answer_id)
 
 class Answer():
     """
