@@ -11,7 +11,7 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.core.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 
 class IncomeID(GABMID):
     """

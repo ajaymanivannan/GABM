@@ -33,7 +33,7 @@ class GABMAttribute:
     def __repr__(self):
         """
         Return:
-            A string representation.
+            Official string representation.
         """
         return self.__str__()
 
@@ -50,8 +50,6 @@ class GABMAttributeMap:
             items (dict[GABMID, GABMAttribute]): A dictionary mapping GABMID objects to GABMAttribute instances.
         """
         self._map: Dict[GABMID, T] = items
-
-    
 
     T = TypeVar('T', bound=GABMAttribute)
 
