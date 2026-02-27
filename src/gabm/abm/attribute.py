@@ -55,11 +55,6 @@ class GABMAttributeMap:
         """
         self._map: Dict[GABMID, T] = items
 
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> upstream/main
     T = TypeVar('T', bound=GABMAttribute)
 
     def get(self, id: GABMID):

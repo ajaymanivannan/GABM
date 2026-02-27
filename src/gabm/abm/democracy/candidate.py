@@ -1,7 +1,18 @@
+"""
+Election module for GABM.
+"""
+# Metadata
+__author__ = ["Andy Turner <agdturner@gmail.com>"]
+__version__ = "0.1.0"
+__copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
+# Standard library imports
+import logging
+from typing import Dict
+# Local imports
+from gabm.core.id import GABMID
 
-# CandidateID now extends BaseID
-class CandidateID(BaseID):
+class CandidateID(GABMID):
     """
     A unique identifier for a Candidate instance.
     Attributes:

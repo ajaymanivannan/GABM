@@ -9,6 +9,8 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Standard library imports
 import logging
 from typing import Dict
+# Local imports
+from gabm.core.id import GABMID
 
 class ElectionID(GABMID):
     """
@@ -39,49 +41,19 @@ class Election():
         self.description = description
 
 
-<<<<<<< HEAD
-class VoteID():
-=======
 class VoteID(GABMID):
->>>>>>> upstream/main
     """
     A unique identifier for a Vote instance.
     Attributes:
         vote_id (int): The unique identifier for the vote.
     """
     def __init__(self, vote_id: int):
-<<<<<<< HEAD
-        self.id = vote_id
-
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"VoteID({self.id})"
-
-    def __repr__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return self.__str__()
-
-    def __eq__(self, other):
-        if isinstance(other, VoteID):
-            return self.id == other.id
-        return False
-
-    def __hash__(self):
-        return hash(self.id)
-=======
         """
         Initialize
         Args:
             vote_id (int): The unique identifier for the vote.
         """
         super().__init__(vote_id)
->>>>>>> upstream/main
 
 class Vote():
     """
