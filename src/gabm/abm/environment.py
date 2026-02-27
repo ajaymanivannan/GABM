@@ -6,7 +6,6 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
 # Standard library imports
 from typing import Dict
 # Local imports

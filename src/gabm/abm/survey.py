@@ -64,7 +64,11 @@ class Question():
         """
         self.answers.append(answer)
 
+<<<<<<< HEAD
+class AnswerID(BaseID):
+=======
 class AnswerID(GABMID):
+>>>>>>> upstream/main
     """
     A unique identifier for a Answer instance.
     Attributes:

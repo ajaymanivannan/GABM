@@ -33,7 +33,11 @@ class GABMAttribute:
     def __repr__(self):
         """
         Return:
+<<<<<<< HEAD
+            A string representation.
+=======
             Official string representation.
+>>>>>>> upstream/main
         """
         return self.__str__()
 

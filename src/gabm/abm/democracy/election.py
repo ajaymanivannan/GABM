@@ -9,6 +9,8 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Standard library imports
 import logging
 from typing import Dict
+# Local imports
+from gabm.core.id import GABMID
 
 class ElectionID(GABMID):
     """
