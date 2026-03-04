@@ -10,9 +10,9 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 from typing import Dict
 # Local imports
-from gabm.core.id import GABMID
+from gabm.core.abm.agent import Citizen, CitizenID
 
-class CandidateID(GABMID):
+class CandidateID(CitizenID):
     """
     A unique identifier for a Candidate instance.
     Attributes:
@@ -21,7 +21,7 @@ class CandidateID(GABMID):
     def __init__(self, candidate_id: int):
         super().__init__(candidate_id)
 
-class Candidate():
+class Candidate(Citizen):
     """
     For representing a candidate.
     Attributes:
