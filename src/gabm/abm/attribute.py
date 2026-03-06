@@ -56,6 +56,55 @@ class GABMAttributeMap:
 
     T = TypeVar('T', bound=GABMAttribute)
 
+    def __str__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return f"{self.__class__.__name__}({self._map})"
+
+    def __repr__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return self.__str__()
+
+    def __iter__(self):
+        """
+        Return:
+            An iterator over the attribute instances in the map.
+        """
+        return iter(self._map.values())
+
+    def __len__(self):
+        """
+        Return:
+            The number of attributes in the map.
+        """
+        return len(self._map)
+
+    def __contains__(self, id_obj):
+        """
+        Return True if the ID object is a key in the map.
+        """
+        return id_obj in self._map
+
+    def __getitem__(self, id_obj):
+        """
+        Override the [] operator to allow direct access to attributes by their ID objects.
+        
+        Return:
+            The attribute instance for the given ID object.
+        
+        Raises:
+            KeyError: If the ID object is not found in the map.
+        
+        """
+        if not isinstance(id_obj, GABMID):
+            raise TypeError(f"Key must be a GABMID, got {type(id_obj)}")
+        return self._map[id_obj]
+
     def keys(self):
         """
         Return:
@@ -98,42 +147,3 @@ class GABMAttributeMap:
         if not isinstance(attr.id, GABMID):
             raise TypeError(f"Attribute id must be a GABMID, got {type(attr.id)}")
         self._map[attr.id] = attr
-
-    def __getitem__(self, id_obj):
-        """
-        Return:
-            The attribute instance for the given ID object.
-        Raises:
-            KeyError: If the ID object is not found in the map.
-        """
-        if not isinstance(id_obj, GABMID):
-            raise TypeError(f"Key must be a GABMID, got {type(id_obj)}")
-        return self._map[id_obj]
-
-    def __iter__(self):
-        """
-        Return:
-            An iterator over the attribute instances in the map.
-        """
-        return iter(self._map.values())
-
-    def __len__(self):
-        """
-        Return:
-            The number of attributes in the map.
-        """
-        return len(self._map)
-
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"{self.__class__.__name__}({self._map})"
-
-    def __repr__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return self.__str__()

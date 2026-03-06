@@ -21,11 +21,6 @@ class GenderID(GABMID):
     Attributes:
         id (int): The unique identifier for the gender.
     """
-    # Standard GenderID constants for clarity and maintainability
-    UNKNOWN = None  # type: GenderID
-    FEMALE = None   # type: GenderID
-    MALE = None     # type: GenderID
-    NON_BINARY = None  # type: GenderID
     def __init__(self, gender_id: int):
         """
         Initialize
@@ -33,6 +28,13 @@ class GenderID(GABMID):
             gender_id (int): The unique identifier for the gender.
         """
         super().__init__(gender_id)
+
+
+# Standard GenderID constants for clarity and maintainability
+GenderID.UNKNOWN = GenderID(0)  # type: GenderID
+GenderID.FEMALE = GenderID(1)   # type: GenderID
+GenderID.MALE = GenderID(2)     # type: GenderID
+GenderID.NON_BINARY = GenderID(3)  # type: GenderID
 
 class Gender(GABMAttribute):
     """
@@ -57,15 +59,11 @@ class GenderMap(GABMAttributeMap):
 
     By default, the map is initialized as follows::
 
-        g0 = GenderID(0)
-        g1 = GenderID(1)
-        g2 = GenderID(2)
-        g3 = GenderID(3)
         items: Dict[GenderID, Gender] = {
-            g0: Gender(g0, "unknown"),
-            g1: Gender(g1, "female"),
-            g2: Gender(g2, "male"),
-            g3: Gender(g3, "non-binary"),
+            GenderID.UNKNOWN: Gender(GenderID.UNKNOWN, "unknown"),
+            GenderID.FEMALE: Gender(GenderID.FEMALE, "female"),
+            GenderID.MALE: Gender(GenderID.MALE, "male"),
+            GenderID.NON_BINARY: Gender(GenderID.NON_BINARY, "non-binary"),
         }
         super().__init__(items)
     """
@@ -73,16 +71,6 @@ class GenderMap(GABMAttributeMap):
         """
         Initialize the GenderMap object.
         """
-        # Initialize GenderID constants if not already set
-        if GenderID.UNKNOWN is None:
-            GenderID.UNKNOWN = GenderID(0)
-        if GenderID.FEMALE is None:
-            GenderID.FEMALE = GenderID(1)
-        if GenderID.MALE is None:
-            GenderID.MALE = GenderID(2)
-        if GenderID.NON_BINARY is None:
-            GenderID.NON_BINARY = GenderID(3)
-
         items: Dict[GenderID, Gender] = {
             GenderID.UNKNOWN: Gender(GenderID.UNKNOWN, "unknown"),
             GenderID.FEMALE: Gender(GenderID.FEMALE, "female"),

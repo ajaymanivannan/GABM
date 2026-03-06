@@ -12,8 +12,6 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 from pathlib import Path
 import time
 from typing import Any, Optional, Dict
-# Hugging Face Transformers for local model loading and inference
-from transformers import AutoModelForCausalLM, AutoTokenizer
 # Shared utilities for caching and logging
 from .utils import load_llm_cache, cache_and_log, get_llm_cache_paths
 
@@ -25,6 +23,18 @@ def download_apertus_model(model_name: str) -> None:
         model_name (str): The Hugging Face model name to download (e.g., 'swiss-ai/apertus-70b-instruct').
     """
     print(f"Downloading model and tokenizer for: {model_name}")
+    # Hugging Face Transformers for local model loading and inference
+    # Note: This will download the model and tokenizer to the Hugging Face cache directory (~/.cache/huggingface/transformers)
+    # The model will be cached locally after the first download, so subsequent runs will be faster.
+    # You can specify a different cache directory by setting the TRANSFORMERS_CACHE environment variable.
+    # For more details on Hugging Face caching, see: https://huggingface.co/docs/transformers/cache
+    # This function is intended to be run once to download the model, and then you can use local_apertus_infer() for inference without needing to download again.
+    # If you want to clear the Hugging Face cache, you can delete the contents of the cache directory or set a different cache directory.
+    # The import is done in this way here to avoid requiring the transformers package for users who only want to use the API-based services and not local inference.
+    try:
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+    except ImportError:
+        raise ImportError("The 'transformers' package is required for this function. Please install it with 'pip install transformers'.")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
     print("Download complete. Model and tokenizer are now cached locally.")
@@ -73,6 +83,18 @@ def local_apertus_infer(
     if logger:
         logger.info(f"Loading tokenizer and model for {model_name} on {device}...")
     t0 = time.time()
+    # Hugging Face Transformers for local model loading and inference
+    # Note: This will download the model and tokenizer to the Hugging Face cache directory (~/.cache/huggingface/transformers)
+    # The model will be cached locally after the first download, so subsequent runs will be faster.
+    # You can specify a different cache directory by setting the TRANSFORMERS_CACHE environment variable.
+    # For more details on Hugging Face caching, see: https://huggingface.co/docs/transformers/cache
+    # This function is intended to be run once to download the model, and then you can use local_apertus_infer() for inference without needing to download again.
+    # If you want to clear the Hugging Face cache, you can delete the contents of the cache directory or set a different cache directory.
+    # The import is done in this way here to avoid requiring the transformers package for users who only want to use the API-based services and not local inference.
+    try:
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+    except ImportError:
+        raise ImportError("The 'transformers' package is required for this function. Please install it with 'pip install transformers'.")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
     t1 = time.time()
