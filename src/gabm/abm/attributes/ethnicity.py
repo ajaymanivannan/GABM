@@ -17,6 +17,7 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 class EthnicityID(GABMID):
     """
     A unique identifier for an Ethnicity instance.
+
     Attributes:
         id (int): The unique identifier for the ethnicity.
     """
@@ -31,6 +32,7 @@ class EthnicityID(GABMID):
 class Ethnicity(GABMAttribute):
     """
     An Ethnicity.
+
     Attributes:
         id (EthnicityID): Unique identifier for the ethnicity.
         description (str): The description of the ethnicity.
@@ -47,7 +49,9 @@ class Ethnicity(GABMAttribute):
 class EthnicityMap(GABMAttributeMap):
     """
     A mapping of EthnicityIds to Ethnicity.
-    By default, the map is initialized as follows:
+
+    By default, the map is initialized as follows::
+
         e0 = EthnicityID(0)
         e1 = EthnicityID(1)
         e2 = EthnicityID(2)

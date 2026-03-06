@@ -20,6 +20,7 @@ from .utils import load_llm_cache, cache_and_log, get_llm_cache_paths
 def download_apertus_model(model_name: str) -> None:
     """
     Downloads and caches the specified Apertus model and tokenizer using Hugging Face Transformers.
+    
     Args:
         model_name (str): The Hugging Face model name to download (e.g., 'swiss-ai/apertus-70b-instruct').
     """
@@ -39,6 +40,7 @@ def local_apertus_infer(
 ) -> str:
     """
     Run local inference with an Apertus model, using shared cache and logging utilities.
+    
     Args:
         model_name (str): The Hugging Face model name to use (e.g., 'swiss-ai/apertus-70b-instruct').
         prompt (str): The input prompt to send to the model.
@@ -47,8 +49,10 @@ def local_apertus_infer(
         cache_path (str, optional): An optional path to the cache file. If not provided, uses default paths.
         max_new_tokens (int): The maximum number of new tokens to generate.
         logger: Optional logger for logging messages.
+
     Returns:
         str: The generated response from the model.
+
     """
     messages_think = [{"role": "user", "content": prompt}]
     cache_key = (model_name, prompt)

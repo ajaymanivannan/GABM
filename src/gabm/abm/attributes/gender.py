@@ -17,6 +17,7 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 class GenderID(GABMID):
     """
     A unique identifier for a Gender instance.
+
     Attributes:
         id (int): The unique identifier for the gender.
     """
@@ -36,6 +37,7 @@ class GenderID(GABMID):
 class Gender(GABMAttribute):
     """
     A Gender.
+
     Attributes:
         id (GenderID): Unique identifier for the gender.
         description (str): The description of the gender.
@@ -52,7 +54,9 @@ class Gender(GABMAttribute):
 class GenderMap(GABMAttributeMap):
     """
     A mapping of GenderIds to Genders.
-    By default, the map is initialized as follows:
+
+    By default, the map is initialized as follows::
+
         g0 = GenderID(0)
         g1 = GenderID(1)
         g2 = GenderID(2)

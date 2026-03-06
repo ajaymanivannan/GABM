@@ -15,6 +15,7 @@ from gabm.abm.group import OpinionatedGroup
 class PoliticalPartyID(GABMID):
     """
     A unique identifier for a PoliticalParty instance.
+
     Attributes:
         party_id (int): The unique identifier for the political party.
     """
@@ -25,6 +26,7 @@ class PoliticalPartyID(GABMID):
 class PoliticalParty(OpinionatedGroup):
     """
     For representing a political party.
+    
     Attributes:
         id (PoliticalPartyID): Unique identifier for the political party.
         name (str): The name of the political party.

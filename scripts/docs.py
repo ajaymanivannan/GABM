@@ -289,32 +289,6 @@ def main():
                         f.writelines(new_lines)
                     logger.info(f"Removed ':recursive:' from {fpath}")
 
-    # Now, after all .rst post-processing, insert '   :no-index:' after '.. automodule:: gabm' in gabm.rst if not already present
-    gabm_rst = os.path.join(apidoc_output, 'gabm.rst')
-    if os.path.exists(gabm_rst):
-        with open(gabm_rst, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-        new_lines = []
-        i = 0
-        while i < len(lines):
-            line = lines[i]
-            new_lines.append(line)
-            if line.strip().lower() == '.. automodule:: gabm':
-                # Skip any blank lines after the directive
-                j = i + 1
-                while j < len(lines) and lines[j].strip() == '':
-                    new_lines.append(lines[j])
-                    j += 1
-                # Only insert if not already present as the next non-blank, indented line
-                if j >= len(lines) or ':no-index:' not in lines[j]:
-                    new_lines.append('   :no-index:\n')
-                i = j - 1
-            i += 1
-        # Only write if changed
-        if new_lines != lines:
-            with open(gabm_rst, 'w', encoding='utf-8') as f:
-                f.writelines(new_lines)
-            logger.info(f"Ensured '   :no-index:' after '.. automodule:: gabm' in {gabm_rst}")
     # Copy files from project root
     for fname in DOC_FILES:
         src = os.path.join(ROOT, fname)
@@ -517,7 +491,22 @@ def main():
         with open(dst, "w", encoding="utf-8") as f:
             f.write(new_content)
         logger.info(f"Copied and processed: {fname}")
-
+    # Ensure :no-index: is at the very top of gabm.rst to suppress duplicate object warnings
+    gabm_rst = os.path.join(apidoc_output, 'gabm.rst')
+    if os.path.exists(gabm_rst):
+        with open(gabm_rst, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        # Insert :no-index: at the top if not present
+        if not any(':no-index:' in line for line in lines[:3]):
+            # Find the first non-empty line
+            insert_at = 0
+            while insert_at < len(lines) and lines[insert_at].strip() == '':
+                insert_at += 1
+            lines = lines[:insert_at] + [':no-index:\n', '\n'] + lines[insert_at:]
+            with open(gabm_rst, 'w', encoding='utf-8') as f:
+                f.writelines(lines)
+            logger.info(f"Inserted ':no-index:' at the top of {gabm_rst}")
+    
 if __name__ == "__main__":
     try:
         main()

@@ -33,6 +33,7 @@ def safe_api_call(api_name: str) -> Callable:
 
     Returns:
         function: Decorator that wraps the target function, returning None on error.
+    
     """
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
@@ -125,8 +126,10 @@ def load_models_from_json(models_json_path: Path) -> List[Any]:
 
     Args:
         models_json_path (Path): Path to the JSON file.
+    
     Returns:
         list: List of model dicts.
+    
     """
     if not models_json_path.exists():
         logging.warning(f"Model JSON file not found: {models_json_path}")
@@ -141,11 +144,16 @@ def load_models_from_json(models_json_path: Path) -> List[Any]:
 def load_llm_cache(cache_path: Path, logger: Optional[Any] = None) -> Dict[Any, Any]:
     """
     Load a pickle cache from the given path. Returns an empty dict if not found or on error.
+
     Args:
-        cache_path (Path): Path to the pickle file.
-        logger: Logger for warnings (optional).
+        cache_path (Path):
+            Path to the pickle file.
+        logger:
+            Logger for warnings (optional).
+
     Returns:
         dict: The loaded cache or an empty dict.
+
     """
     if cache_path.exists():
         try:
@@ -184,6 +192,7 @@ def cache_and_log(
 ) -> None:
     """
     Cache and log the prompt/response pair to a JSONL file.
+    
     Args:
         cache: The in-memory cache dictionary to update.
         cache_key: The key to use for caching the response.
@@ -241,10 +250,13 @@ def extract_text_from_response(response: Any) -> str:
 def get_llm_cache_paths(service_name: str) -> Tuple[Path, Path]:
     """
     Return the cache (pickle) and JSONL log paths for a given LLM service.
+    
     Args:
         service_name (str): The name of the LLM service (e.g., 'openai').
+    
     Returns:
         tuple: (cache_path, jsonl_path) as Path objects
+    
     """
     base = Path(f"data/llm/{service_name}")
     name = "prompt_response_cache"
@@ -264,6 +276,7 @@ def pre_send_check_and_cache(
 ) -> Optional[Any]:
     """
     Generic pre-send checks: API key presence, cache hit, and env var setup.
+    
     Args:
         api_key (str): The API key for the LLM service.
         message (str): The message being sent.
@@ -272,8 +285,10 @@ def pre_send_check_and_cache(
         logger: Logger for info/error messages.
         service_name (str): Name of the LLM service (for error messages).
         api_key_env_var (str): The environment variable name for the API key.
+    
     Returns:
         The cached response if a cache hit occurs, or None if no cache hit or on error
+    
     """
     if not api_key:
         logger.error(f"{service_name} API key must be provided.")
@@ -302,6 +317,7 @@ def call_and_cache_response(
 ) -> Optional[Any]:
     """
     Generic try/except, error logging, model listing, and caching for LLM send methods.
+    
     Args:
         api_call (callable): Function that performs the LLM API call and returns the response.
         cache_and_log_func (callable): Function to cache and log the response.
@@ -316,8 +332,10 @@ def call_and_cache_response(
         service_name (str): Name of the LLM service (for error messages).
         list_available_models_func (callable): Function to list available models.
         extract_text_from_response (callable, optional): Function to extract text from the response for logging. Passed to cache_and_log_func.
+    
     Returns:
         The response object or None on error.
+    
     """
     try:
         response = api_call()

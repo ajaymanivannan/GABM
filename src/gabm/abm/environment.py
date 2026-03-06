@@ -98,10 +98,13 @@ class OpinionatedEnvironment(Environment):
     def get_AverageOpinion(self, opinion_topic_id: OpinionTopicID) -> float:
         """
         Get the average opinion value of the group members on a specific topic.
+
         Args:
             opinion_topic_id: The opinion topic ID to get the average opinion on.
-        Return:
+
+        Returns:
             The average opinion value for the topic, or None if no members have an opinion on it.
+
         """
 
 class Nation(OpinionatedEnvironment):

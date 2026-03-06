@@ -34,12 +34,15 @@ class DeepSeekService(LLMService):
         """
         Send a prompt to DeepSeek and return the response object.
         Caches and logs the response for reproducibility.
+        
         Args:
             api_key (str): DeepSeek API key.
             message (str): Prompt to send.
             model (str): Model name (default: "deepseek-model-1").
+        
         Returns:
             Response object (dict) or None on error.
+        
         """
         cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
         if cached is not None:
@@ -75,10 +78,13 @@ class DeepSeekService(LLMService):
     def list_available_models(self, api_key):
         """
         List available DeepSeek models and write them to JSON and TXT files. Returns the list.
+        
         Args:
             api_key (str): DeepSeek API key.
+
         Returns:
             list: List of model objects.
+
         """
         def api_call():
             client = DeepSeekAPI(api_key=api_key)

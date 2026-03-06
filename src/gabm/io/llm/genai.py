@@ -39,12 +39,15 @@ class GenAIService(LLMService):
         """
         Send a prompt to Google Generative AI and return the response object.
         Caches and logs the response for reproducibility.
+        
         Args:
             api_key (str): Google API key.
             message (str): Prompt to send.
             model (str): Model name (default: "models/gemini-2.5-pro").
+        
         Returns:
             Response object (dict) or None on error.
+        
         """
         cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
         if cached is not None:

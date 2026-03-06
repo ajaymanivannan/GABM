@@ -16,6 +16,7 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 class WealthID(GABMID):
     """
     A unique identifier for a Wealth instance.
+
     Attributes:
         wealth_id (int): The unique identifier for the wealth.
     """
@@ -25,6 +26,7 @@ class WealthID(GABMID):
 class Wealth(GABMAttribute):
     """
     For representing wealth.
+
     Attributes:
         id (WealthID): Unique identifier for the wealth.
         description (str): The description of the wealth.
@@ -42,7 +44,9 @@ class Wealth(GABMAttribute):
 class WealthMap(GABMAttributeMap):
     """
     A mapping of WealthIds to Wealth.
-    By default, the map is initialized as follows:
+
+    By default, the map is initialized as follows::
+
         w0 = WealthID(0)
         w1 = WealthID(1)
         w2 = WealthID(2)

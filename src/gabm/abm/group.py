@@ -65,8 +65,10 @@ class Group:
     def add_member(self, agent: Agent):
         """
         Add agent to the group and update the agent's group membership.
+
         Args:
             agent: The Agent instance to add to the group.
+
         """
         self.members.add(agent)
         agent.groups.add(self)
@@ -74,8 +76,10 @@ class Group:
     def remove_member(self, agent: Agent):
         """
         Remove an agent from the group and update the agent's group membership.
+
         Args:
             agent: The Agent instance to remove from the group.
+
         """
         self.members.discard(agent)
         agent.groups.discard(self)
@@ -125,10 +129,13 @@ class OpinionatedGroup(Group):
     def get_AverageOpinion(self, opinion_topic_id: OpinionTopicID) -> float:
         """
         Get the average opinion value of the group members on a specific topic.
+
         Args:
             opinion_topic_id: The opinion topic ID to get the average opinion on.
-        Return:
+
+        Returns:
             The average opinion value for the topic, or None if no members have an opinion on it.
+
         """
         total_opinion = 0.0
         count = 0
