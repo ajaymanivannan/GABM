@@ -42,12 +42,18 @@ class LLMService(ABC):
     def send(self, api_key, message, model=None):
         """
         Send a prompt to the LLM and return the response object.
+
         Args:
-            api_key (str): The API key for the LLM service.
-            message (str): The message to send.
-            model (str, optional): The model to use for the request.
+            api_key (str):
+                The API key for the LLM service.
+            message (str):
+                The message to send.
+            model (str, optional):
+                The model to use for the request.
+
         Returns:
             The response object from the LLM.
+
         """
         pass
 
@@ -55,21 +61,27 @@ class LLMService(ABC):
     def list_available_models(self, api_key):
         """
         List available models for the LLM service.
+
         Args:
             api_key (str): The API key for the LLM service.
+        
         Returns:
             A list of available models.
+        
         """
         pass
     
     def _call_with_error_handling(self, func, *args, **kwargs):
         """
         General error handling for API calls. Logs errors.
+        
         Args:
             func: The function to call that interacts with the API.
             *args, **kwargs: Arguments to pass to the function.
+        
         Returns:
             Structured error dicts for quota and API errors.
+        
         """
         try:
             return func(*args, **kwargs)

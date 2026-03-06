@@ -16,6 +16,7 @@ from gabm.core.id import GABMID
 class ElectionID(GABMID):
     """
     A unique identifier for an Election instance.
+
     Attributes:
         election_id (int): The unique identifier for the election.
     """
@@ -25,6 +26,7 @@ class ElectionID(GABMID):
 class Election():
     """
     For representing an election.
+
     Attributes:
         id (ElectionID): Unique identifier for the election.
         date (date): The date of the election.
@@ -44,6 +46,7 @@ class Election():
 class GeneralElection(Election):
     """
     For representing a general election.
+
     Attributes:
         id (ElectionID): Unique identifier for the election.
         date (date): The date of the election.
@@ -63,6 +66,7 @@ class GeneralElection(Election):
 class Referendum(Election):
     """
     For representing a referendum.
+    
     Attributes:
         id (ElectionID): Unique identifier for the referendum.
         date (date): The date of the referendum.
@@ -87,6 +91,7 @@ class Referendum(Election):
 class VoteID(GABMID):
     """
     A unique identifier for a Vote instance.
+
     Attributes:
         vote_id (int): The unique identifier for the vote.
     """
@@ -101,6 +106,7 @@ class VoteID(GABMID):
 class Vote():
     """
     For representing a vote.
+
     Attributes:
         id (VoteID): Unique identifier for the vote.
         description (str): The description of the vote.

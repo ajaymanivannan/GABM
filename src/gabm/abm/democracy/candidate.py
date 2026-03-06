@@ -15,6 +15,7 @@ from gabm.abm.agent import AgentID, Citizen
 class Candidate(Citizen):
     """
     For representing a candidate.
+    
     Attributes:
         id (AgentID): Unique identifier for the candidate.
         description (str): The description of the candidate.

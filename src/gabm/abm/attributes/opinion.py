@@ -17,6 +17,7 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 class OpinionTopicID(GABMID):
     """
     A unique identifier for an opinion topic.
+
     Attributes:
         id (int): The unique identifier for the opinion topic.
     """
@@ -31,6 +32,7 @@ class OpinionTopicID(GABMID):
 class OpinionTopic():
     """
     A topic for an opinion.
+
     Examples:
         id = 0, topic = "positive", description = "A positive opinion."
         id = 1, topic = "neutral", description = "A neutral opinion."
@@ -70,19 +72,28 @@ class OpinionTopic():
 class OpinionValue():
     """
     A value for an opinion.
+
+
     Attributes:
-        opinion_topic_id (OpinionTopicID): The unique identifier for the opinion.
-        value (int): An integer value of the opinion.
-         This can be used as a key in a dictionary to map to the description.
-         This could be a number mapped to a bipolar Likert scale (https://en.wikipedia.org/wiki/Likert_scale) survey response option.
-         It is left to the user to decide how to interpret the value, and what it maps onto.
-        description (str): A description of the opinion value.
-         For example:
-         -2, "Strongly disagree"
-         -1, "Disagree"
+        opinion_topic_id (OpinionTopicID):
+            The unique identifier for the opinion.
+        value (int):
+            An integer value of the opinion. This can be used as a key in a
+            dictionary to map to the description. This could be a number mapped to a
+            bipolar Likert scale (https://en.wikipedia.org/wiki/Likert_scale) survey
+            response option. It is left to the user to decide how to interpret the
+            value, and what it maps onto.
+        description (str):
+            A description of the opinion value.
+
+    Example::
+
+        -2, "Strongly disagree"
+        -1, "Disagree"
          0, "Neither agree nor disagree"
          1, "Agree"
          2, "Strongly agree"
+
     """
     def __init__(self, opinion_topic_id: OpinionTopicID, value: int, description: str):
         """
@@ -113,6 +124,16 @@ class OpinionValue():
 class OpinionValueMap():
     """
     A dictionary of OpinionValue objects.
+
+    The key is an OpinionTopicID, the value is an OpinionValue object.
+    
+    This can be used to map from an OpinionTopicID and value to a description of the opinion value.
+    For example, if the opinion topic is "positive", then valid values might be -2, -1, 0, 1, 2, where -2 is "Strongly negative" and 2 is "Strongly positive".
+    The user can choose to enforce valid values or allow for more flexible representations of opinions.
+    The description of the opinion value can be retrieved using the get_description() method, which looks up the description based on the opinion topic ID and value in the opinion_values dictionary.
+    If the value is not found in the opinion_values, None will be returned.
+    This allows for a clear mapping between numerical values and their corresponding descriptions, which can be useful for interpreting and analyzing opinions in the simulation.
+    
     Attributes:
         values (Dict[OpinionTopicID, OpinionValue]): A dictionary mapping OpinionTopicID objects to OpinionValue objects.
     """
@@ -141,6 +162,7 @@ class OpinionValueMap():
 class Opinion():
     """
     An Opinion can belong to a Person, OpinionatedGroup, or OpinionatedEnvironment.
+    
     Attributes:
         opinion_id (OpinionTopicID): The unique identifier for the opinion.
         opinion_values (OpinionValueMap): The opinion values for the opinion.
@@ -184,6 +206,7 @@ class Opinion():
     def get_description(self) -> str:
         """
         Get the description of the opinion value.
+
         Returns:
             str: The description of the opinion value, or None if not found.
         """
@@ -196,6 +219,7 @@ class Opinion():
     def get_value(self) -> int:
         """
         Get the value of the opinion.
+
         Returns:
             int: The value of the opinion.
         """
@@ -204,6 +228,7 @@ class Opinion():
     def set_value(self, value: int):
         """
         Set the value of the opinion.
+
         Args:
             value: The new value of the opinion.
         """

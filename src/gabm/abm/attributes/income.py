@@ -16,6 +16,7 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 class IncomeID(GABMID):
     """
     A unique identifier for an Income instance.
+
     Attributes:
         id (int): The unique identifier for the income.
     """
@@ -30,6 +31,7 @@ class IncomeID(GABMID):
 class Income(GABMAttribute):
     """
     For representing income.
+
     Attributes:
         id (IncomeID): Unique identifier for the income.
         description (str): The description of the income.
@@ -46,7 +48,9 @@ class Income(GABMAttribute):
 class IncomeMap(GABMAttributeMap):
     """
     A mapping of IncomeIds to Income.
-    By default, the map is initialized as follows:
+
+    By default, the map is initialized as follows::
+
         i0 = IncomeID(0)
         i1 = IncomeID(1)
         i2 = IncomeID(2)

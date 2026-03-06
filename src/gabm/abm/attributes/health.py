@@ -6,7 +6,6 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
 # Standard library imports
 import logging
 from typing import Dict
@@ -17,6 +16,7 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 class HealthID(GABMID):
     """
     A unique identifier for a Health instance.
+
     Attributes:
         id (int): The unique identifier for the health.
     """
@@ -31,6 +31,7 @@ class HealthID(GABMID):
 class Health(GABMAttribute):
     """
     For representing health.
+
     Attributes:
         id (HealthID): Unique identifier for the health.
         description (str): The description of the health.
@@ -47,7 +48,9 @@ class Health(GABMAttribute):
 class HealthMap(GABMAttributeMap):
     """
     A mapping of HealthIds to Health.
-    By default, the map is initialized as follows:
+
+    By default, the map is initialized as follows::
+
         h0 = HealthID(0)
         h1 = HealthID(1)
         h2 = HealthID(2)

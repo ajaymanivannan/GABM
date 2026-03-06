@@ -16,6 +16,7 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 class EmploymentID(GABMID):
     """
     A unique identifier for an Employment instance.
+
     Attributes:
         id (int): The unique identifier for the employment.
     """
@@ -30,17 +31,26 @@ class EmploymentID(GABMID):
 class Employment(GABMAttribute):
     """
     For representing employment.
+
     Attributes:
         id (EmploymentID): Unique identifier for the employment.
         description (str): The description of the employment.
     """
     def __init__(self, employment_id: EmploymentID, description: str):
+        """
+        Initialize
+        Args:
+            employment_id (EmploymentID): The unique identifier for the employment.
+            description (str): The description of the employment.
+        """
         super().__init__(employment_id, description)
 
 class EmploymentMap(GABMAttributeMap):
     """
     A mapping of EmploymentIds to Employment.
-    By default, the map is initialized as follows:
+
+    By default, the map is initialized as follows::
+
         e0 = EmploymentID(0)
         e1 = EmploymentID(1)
         e2 = EmploymentID(2)
@@ -54,10 +64,11 @@ class EmploymentMap(GABMAttributeMap):
             e2: Employment(e2, "employed part time"),
             e3: Employment(e3, "unemployed"),
             e4: Employment(e4, "student"),
-            e5: Employment(e5, "retired")
+            e5: Employment(e5, "retired"),
             e6: Employment(e6, "economically inactive")
         }
         super().__init__(items)
+
     """
     def __init__(self):
         e0 = EmploymentID(0)

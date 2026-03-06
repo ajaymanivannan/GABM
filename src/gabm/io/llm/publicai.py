@@ -43,12 +43,15 @@ class PublicAIService(LLMService):
         """
         Send a prompt to PublicAI and return the response object.
         Caches and logs the response for reproducibility.
+        
         Args:
             api_key (str): PublicAI API key.
             message (str): Prompt to send.
             model (str): Model name (default: "apertus-llm-7b").
+        
         Returns:
             Response object (dict) or None on error.
+        
         """
         cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
         if cached is not None:
@@ -90,10 +93,13 @@ class PublicAIService(LLMService):
     def list_available_models(self, api_key):
         """
         List available PublicAI models and write them to JSON and TXT files. Returns the list.
+        
         Args:
             api_key (str): PublicAI API key.
+        
         Returns:
             list: List of model objects.
+        
         """
         def api_call():
             url = "https://api.publicai.co/v1/models"

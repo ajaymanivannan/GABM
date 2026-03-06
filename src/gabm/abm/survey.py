@@ -86,8 +86,10 @@ class Question():
     def get_prompt(self) -> str:
         """
         Get the LLM prompt for the question - the text and available answers.
+
         Returns:
             A string representation of the question context.
+
         """
         question_text = "I am asked: " + self.text
         question_text += ". I can choose from the following options: "
@@ -97,8 +99,10 @@ class Question():
     def add_answer(self, answer: Answer):
         """
         Add an answer to the question.
+
         Args:
             answer: The Answer instance to add.
+
         """
         self.answers.append(answer)
 

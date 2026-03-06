@@ -35,12 +35,15 @@ class OpenAIService(LLMService):
         """
         Send a prompt to OpenAI and return the response object.
         Caches and logs the response for reproducibility.
+        
         Args:
             api_key (str): OpenAI API key.
             message (str): Prompt to send.
             model (str): Model name (default: "gpt-3.5-turbo").
+        
         Returns:
             Response object or None on error.
+        
         """
         cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
         if cached is not None:
@@ -72,10 +75,13 @@ class OpenAIService(LLMService):
     def list_available_models(self, api_key):
         """
         List available OpenAI models and write them to JSON and TXT files. Returns the list.
+        
         Args:
             api_key (str): OpenAI API key.
+        
         Returns:
             list: List of model objects.
+        
         """
         def api_call():
             client = OpenAI(api_key=api_key)
