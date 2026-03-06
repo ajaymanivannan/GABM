@@ -136,6 +136,11 @@ class Animal(Agent):
             raise ValueError(message)
         # Raise a warning if gender is not in the gender map (if gender map is provided).
         if self.gender is not None and self.gender_map is not None and self.gender not in self.gender_map:
+            debug_info = (
+                f"DEBUG: gender={self.gender!r} (type={type(self.gender)}), "
+                f"gender_map keys={[ (k, type(k)) for k in self.gender_map.keys() ]}"
+            )
+            print(debug_info)
             message = f"Gender value {self.gender} is not in the gender map. Valid gender values are: {list(self.gender_map.keys())}. Setting gender to None."
             logging.warning(message)
             raise ValueError(message)
