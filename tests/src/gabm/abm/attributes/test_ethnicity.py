@@ -40,19 +40,14 @@ def test_ethnicity_map():
     emap = EthnicityMap()
     assert isinstance(emap._map, dict)
     # Check default keys and values
-    eid0 = EthnicityID(0)
-    eid1 = EthnicityID(1)
-    eid2 = EthnicityID(2)
-    eid3 = EthnicityID(3)
-    eid4 = EthnicityID(4)
-    eid5 = EthnicityID(5)
     expected = {
-        eid0: Ethnicity(eid0, "unknown"),
-        eid1: Ethnicity(eid1, "white"),
-        eid2: Ethnicity(eid2, "asian"),
-        eid3: Ethnicity(eid3, "black"),
-        eid4: Ethnicity(eid4, "mixed"),
-        eid5: Ethnicity(eid5, "other")
+        EthnicityID(0): Ethnicity(EthnicityID(0), "unknown"),
+        EthnicityID(1): Ethnicity(EthnicityID(1), "african"),
+        EthnicityID(2): Ethnicity(EthnicityID(2), "american"),
+        EthnicityID(3): Ethnicity(EthnicityID(3), "antipodian"),
+        EthnicityID(4): Ethnicity(EthnicityID(4), "asian"),
+        EthnicityID(5): Ethnicity(EthnicityID(5), "european"),
+        EthnicityID(6): Ethnicity(EthnicityID(6), "other"),
     }
     for k, v in expected.items():
         assert k in emap._map

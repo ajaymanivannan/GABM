@@ -28,6 +28,17 @@ class IncomeID(GABMID):
         """
         super().__init__(income_id)
 
+IncomeID.UNKNOWN = IncomeID(0)
+IncomeID.ZERO_TO_Q1 = IncomeID(1)
+IncomeID.Q1_TO_MEDIAN = IncomeID(2)
+IncomeID.MEDIAN_TO_Q3 = IncomeID(3)
+IncomeID.Q3_TO_TOP_10 = IncomeID(4)
+IncomeID.TOP_10_TO_TOP_1 = IncomeID(5)
+IncomeID.TOP_1_TO_TOP_0_1 = IncomeID(6)
+IncomeID.TOP_0_1_TO_TOP_0_01 = IncomeID(7)
+IncomeID.TOP_0_01_TO_TOP_0_001 = IncomeID(8)
+IncomeID.TOP_0_001 = IncomeID(9)
+
 class Income(GABMAttribute):
     """
     For representing income.
@@ -51,53 +62,33 @@ class IncomeMap(GABMAttributeMap):
 
     By default, the map is initialized as follows::
 
-        i0 = IncomeID(0)
-        i1 = IncomeID(1)
-        i2 = IncomeID(2)
-        i3 = IncomeID(3)
-        i4 = IncomeID(4)
-        i5 = IncomeID(5)
-        i6 = IncomeID(6)
-        i7 = IncomeID(7)
-        i8 = IncomeID(8)
-        i9 = IncomeID(9)
         items: Dict[IncomeID, Income] = {
-            i0: Income(i0, "unknown"),
-            i1: Income(i1, "zero to q1"),
-            i2: Income(i2, "q1 to median"),
-            i3: Income(i3, "median to q3"),
-            i4: Income(i4, "q3 to top 10%"),
-            i5: Income(i5, "top 10% to top 1%"),
-            i6: Income(i6, "top 1% to top 0.1%"),
-            i7: Income(i7, "top 0.1% to top 0.01%"),
-            i8: Income(i8, "top 0.01% to top 0.001%"),
-            i9: Income(i9, "top 0.001%")
+            IncomeID.UNKNOWN: Income(IncomeID.UNKNOWN, "unknown"),
+            IncomeID.ZERO_TO_Q1: Income(IncomeID.ZERO_TO_Q1, "zero to q1"),
+            IncomeID.Q1_TO_MEDIAN: Income(IncomeID.Q1_TO_MEDIAN, "q1 to median"),
+            IncomeID.MEDIAN_TO_Q3: Income(IncomeID.MEDIAN_TO_Q3, "median to q3"),
+            IncomeID.Q3_TO_TOP_10: Income(IncomeID.Q3_TO_TOP_10, "q3 to top 10%"),
+            IncomeID.TOP_10_TO_TOP_1: Income(IncomeID.TOP_10_TO_TOP_1, "top 10% to top 1%"),
+            IncomeID.TOP_1_TO_TOP_0_1: Income(IncomeID.TOP_1_TO_TOP_0_1, "top 1% to top 0.1%"),
+            IncomeID.TOP_0_1_TO_TOP_0_01: Income(IncomeID.TOP_0_1_TO_TOP_0_01, "top 0.1% to top 0.01%"),
+            IncomeID.TOP_0_01_TO_TOP_0_001: Income(IncomeID.TOP_0_01_TO_TOP_0_001, "top 0.01% to top 0.001%"),
+            IncomeID.TOP_0_001: Income(IncomeID.TOP_0_001, "top 0.001%")
         }
     """
     def __init__(self):
         """
         Initialize the IncomeMap object.
         """
-        i0 = IncomeID(0)
-        i1 = IncomeID(1)
-        i2 = IncomeID(2)
-        i3 = IncomeID(3)
-        i4 = IncomeID(4)
-        i5 = IncomeID(5)
-        i6 = IncomeID(6)
-        i7 = IncomeID(7)
-        i8 = IncomeID(8)
-        i9 = IncomeID(9)
         items: Dict[IncomeID, Income] = {
-            i0: Income(i0, "unknown"),
-            i1: Income(i1, "zero to q1"),
-            i2: Income(i2, "q1 to median"),
-            i3: Income(i3, "median to q3"),
-            i4: Income(i4, "q3 to top 10%"),
-            i5: Income(i5, "top 10% to top 1%"),
-            i6: Income(i6, "top 1% to top 0.1%"),
-            i7: Income(i7, "top 0.1% to top 0.01%"),
-            i8: Income(i8, "top 0.01% to top 0.001%"),
-            i9: Income(i9, "top 0.001%")
+            IncomeID.UNKNOWN: Income(IncomeID.UNKNOWN, "unknown"),
+            IncomeID.ZERO_TO_Q1: Income(IncomeID.ZERO_TO_Q1, "zero to q1"),
+            IncomeID.Q1_TO_MEDIAN: Income(IncomeID.Q1_TO_MEDIAN, "q1 to median"),
+            IncomeID.MEDIAN_TO_Q3: Income(IncomeID.MEDIAN_TO_Q3, "median to q3"),
+            IncomeID.Q3_TO_TOP_10: Income(IncomeID.Q3_TO_TOP_10, "q3 to top 10%"),
+            IncomeID.TOP_10_TO_TOP_1: Income(IncomeID.TOP_10_TO_TOP_1, "top 10% to top 1%"),
+            IncomeID.TOP_1_TO_TOP_0_1: Income(IncomeID.TOP_1_TO_TOP_0_1, "top 1% to top 0.1%"),
+            IncomeID.TOP_0_1_TO_TOP_0_01: Income(IncomeID.TOP_0_1_TO_TOP_0_01, "top 0.1% to top 0.01%"),
+            IncomeID.TOP_0_01_TO_TOP_0_001: Income(IncomeID.TOP_0_01_TO_TOP_0_001, "top 0.01% to top 0.001%"),
+            IncomeID.TOP_0_001: Income(IncomeID.TOP_0_001, "top 0.001%")
         }
         super().__init__(items)

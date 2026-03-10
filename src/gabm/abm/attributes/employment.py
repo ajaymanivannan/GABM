@@ -15,22 +15,22 @@ from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 
 class EmploymentID(GABMID):
     """
-    A unique identifier for an Employment instance.
+    A unique identifier for an Employment class instance.
 
     Attributes:
-        id (int): The unique identifier for the employment.
+        id (int): The unique identifier for the employment class instance.
     """
     def __init__(self, employment_id: int):
         """
         Initialize
         Args:
-            employment_id (int): The unique identifier for the employment.
+            employment_id (int): The unique identifier for the employment class instance.
         """
         super().__init__(employment_id)
 
 class Employment(GABMAttribute):
     """
-    For representing employment.
+    Employment class.
 
     Attributes:
         id (EmploymentID): Unique identifier for the employment.

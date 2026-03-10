@@ -20,28 +20,50 @@ class Environment():
     An Environment with opinions.
 
     Attributes:
-        opinions (Dict[OpinionTopicID, Opinion]): A dictionary of opinions.
-        The key is an OpinionTopicID, the value is an Opinion object.
+        year (int):
+            The current year in the simulation.
+        place (str):
+            The name of the place or environment.
+        agents_active (Dict[AgentID, Agent]):
+            A dictionary of active agents in the environment.
+        agents_inactive (Dict[AgentID, Agent]):
+            A dictionary of inactive agents in the environment.
+        groups_active (Dict[GroupID, Group]):
+            A dictionary of active groups in the environment.
+        groups_inactive (Dict[GroupID, Group]):
+            A dictionary of inactive groups in the environment.
+        gender_map (GenderMap):
+            A map for gender attribute lookups.
+        opinions (Dict[OpinionTopicID, Opinion]):
+            A dictionary of opinions.
+            The key is an OpinionTopicID, the value is an Opinion object.
     """
 
     def __init__(self, year: int = 2026, place: str = "Earth",
-        opinions: Dict[OpinionTopicID, Opinion] = None,
-        gender_map: GenderMap = None):
+        gender_map: GenderMap = None,
+        opinions: Dict[OpinionTopicID, Opinion] = None):
         """
-        Initialize an OpinionatedEnvironment.
+        Initialize.
 
         Args:
             year (int):
                 The current year in the simulation.
             place (str):
                 The name of the place or environment.
+            gender_map (GenderMap):
+                A GenderMap instance for gender attribute lookups.
             opinions (Dict[OpinionTopicID, Opinion]):
                 A dictionary of opinions, where the key is an OpinionTopicID and the value is an Opinion object.
                 This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
-            gender_map (GenderMap):
-                A GenderMap instance for gender attribute lookups.
+            
         """
-        super().__init__(year=year, place=place)
+        # No super().__init__ needed; Environment does not inherit from a custom base class
+        self.year = year
+        self.place = place
+        self.agents_active: Dict = {}
+        self.agents_inactive: Dict = {}
+        self.groups_active: Dict = {}
+        self.groups_inactive: Dict = {}
         self.opinions = opinions if opinions is not None else {}
         self.gender_map = gender_map if gender_map is not None else GenderMap()
 
@@ -68,13 +90,16 @@ class Nation(Environment):
     Can be extended with nation-specific attributes and methods.
     
     Attributes:
-        nation (str): The name of the nation (e.g., "United Kingdom").
-        citizens (Group): A group of Person agents representing the citizens of the nation.
-        aliens (Group): A group of Person agents representing the aliens in the nation.
+        nation (str):
+            The name of the nation (e.g., "United Kingdom").
+        citizens (Group):
+            A group of Person agents representing the citizens of the nation.
+        aliens (Group):
+            A group of Person agents representing the aliens in the nation.
     """
     
     def __init__(self, year: int = 2026, place: str = "Earth", 
-        opinions: Dict[OpinionTopicID, Opinion] = None, nation: str = "United Kingdom"):
+        gender_map: GenderMap = None, opinions: Dict[OpinionTopicID, Opinion] = None, nation: str = "United Kingdom"):
         """
         Initialize a Nation environment.
         Args:
@@ -82,19 +107,20 @@ class Nation(Environment):
                 The current year in the simulation.
             place (str):
                 The name of the place or environment.
+            gender_map (GenderMap):
+                A GenderMap instance for gender attribute lookups.
             opinions (Dict[OpinionTopicID, Opinion]):
                 A dictionary of opinions, where the key is an OpinionTopicID and the value is an Opinion object.
                 This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
-            gender_map (GenderMap):
-                A GenderMap instance for gender attribute lookups.
-
+        
         """
-        super().__init__(year=year, place=place, opinions=opinions)
+        super().__init__(year=year, place=place, gender_map=gender_map, opinions=opinions)
         self.nation = nation
-        self.citizens = Group()  # type: Group
-        self.groups_active.append(self.citizens)  # type: ignore
-        self.aliens = Group()  # type: Group
-        self.groups_active.append(self.aliens)  # type: ignore
+        from gabm.abm.group import Group, GroupID
+        self.citizens = Group(GroupID(1), name="Citizens")
+        self.groups_active[self.citizens.id] = self.citizens
+        self.aliens = Group(GroupID(2), name="Aliens")
+        self.groups_active[self.aliens.id] = self.aliens
 
     def __str__(self):
         """

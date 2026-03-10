@@ -96,6 +96,10 @@ Model ID: models/gemini-3.1-pro-preview-customtools
   Description: 
   Owned by: google
 
+Model ID: models/gemini-3.1-flash-lite-preview
+  Description: 
+  Owned by: google
+
 Model ID: models/gemini-3-pro-image-preview
   Description: 
   Owned by: google
@@ -121,6 +125,10 @@ Model ID: models/deep-research-pro-preview-12-2025
   Owned by: google
 
 Model ID: models/gemini-embedding-001
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-embedding-2-preview
   Description: 
   Owned by: google
 
