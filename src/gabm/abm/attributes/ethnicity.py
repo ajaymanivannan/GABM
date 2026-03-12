@@ -29,6 +29,14 @@ class EthnicityID(GABMID):
         """
         super().__init__(ethnicity_id)
 
+EthnicityID.UNKNOWN = EthnicityID(0)
+EthnicityID.AFRICAN = EthnicityID(1)
+EthnicityID.AMERICAN = EthnicityID(2)
+EthnicityID.ANTIPODIAN = EthnicityID(3)
+EthnicityID.ASIAN = EthnicityID(4)
+EthnicityID.EUROPEAN = EthnicityID(5)
+EthnicityID.OTHER = EthnicityID(6)
+
 class Ethnicity(GABMAttribute):
     """
     An Ethnicity.
@@ -52,19 +60,14 @@ class EthnicityMap(GABMAttributeMap):
 
     By default, the map is initialized as follows::
 
-        e0 = EthnicityID(0)
-        e1 = EthnicityID(1)
-        e2 = EthnicityID(2)
-        e3 = EthnicityID(3)
-        e4 = EthnicityID(4)
-        e5 = EthnicityID(5)
         items: Dict[EthnicityID, Ethnicity] = {
-            e0: Ethnicity(e0, "unknown"),
-            e1: Ethnicity(e1, "white"),
-            e2: Ethnicity(e2, "asian"),
-            e3: Ethnicity(e3, "black"),
-            e4: Ethnicity(e4, "mixed"),
-            e5: Ethnicity(e5, "other")
+            EthnicityID.UNKNOWN: Ethnicity(EthnicityID.UNKNOWN, "unknown"),
+            EthnicityID.AFRICAN: Ethnicity(EthnicityID.AFRICAN, "african"),
+            EthnicityID.AMERICAN: Ethnicity(EthnicityID.AMERICAN, "american"),
+            EthnicityID.ANTIPODIAN: Ethnicity(EthnicityID.ANTIPODIAN, "antipodian"),
+            EthnicityID.ASIAN: Ethnicity(EthnicityID.ASIAN, "asian"),
+            EthnicityID.EUROPEAN: Ethnicity(EthnicityID.EUROPEAN, "european"),
+            EthnicityID.OTHER: Ethnicity(EthnicityID.OTHER, "other")
         }
         super().__init__(items)
     """
@@ -72,18 +75,13 @@ class EthnicityMap(GABMAttributeMap):
         """
         Initialize the Ethnicities object.
         """
-        e0 = EthnicityID(0)
-        e1 = EthnicityID(1)
-        e2 = EthnicityID(2)
-        e3 = EthnicityID(3)
-        e4 = EthnicityID(4)
-        e5 = EthnicityID(5)
         items: Dict[EthnicityID, Ethnicity] = {
-            e0: Ethnicity(e0, "unknown"),
-            e1: Ethnicity(e1, "white"),
-            e2: Ethnicity(e2, "asian"),
-            e3: Ethnicity(e3, "black"),
-            e4: Ethnicity(e4, "mixed"),
-            e5: Ethnicity(e5, "other")
+            EthnicityID.UNKNOWN: Ethnicity(EthnicityID.UNKNOWN, "unknown"),
+            EthnicityID.AFRICAN: Ethnicity(EthnicityID.AFRICAN, "african"),
+            EthnicityID.AMERICAN: Ethnicity(EthnicityID.AMERICAN, "american"),
+            EthnicityID.ANTIPODIAN: Ethnicity(EthnicityID.ANTIPODIAN, "antipodian"),
+            EthnicityID.ASIAN: Ethnicity(EthnicityID.ASIAN, "asian"),
+            EthnicityID.EUROPEAN: Ethnicity(EthnicityID.EUROPEAN, "european"),
+            EthnicityID.OTHER: Ethnicity(EthnicityID.OTHER, "other")
         }
         super().__init__(items)

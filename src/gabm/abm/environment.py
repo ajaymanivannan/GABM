@@ -14,34 +14,54 @@ from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionVal
 from gabm.abm.group import Group
 from gabm.abm.attributes.gender import GenderMap
 
-
 class Environment():
     """
     An Environment with opinions.
 
     Attributes:
-        opinions (Dict[OpinionTopicID, Opinion]): A dictionary of opinions.
-        The key is an OpinionTopicID, the value is an Opinion object.
+        year (int):
+            The current year in the simulation.
+        place (str):
+            The name of the place or environment.
+        agents_active (Dict[AgentID, Agent]):
+            A dictionary of active agents in the environment.
+        agents_inactive (Dict[AgentID, Agent]):
+            A dictionary of inactive agents in the environment.
+        groups_active (Dict[GroupID, Group]):
+            A dictionary of active groups in the environment.
+        groups_inactive (Dict[GroupID, Group]):
+            A dictionary of inactive groups in the environment.
+        gender_map (GenderMap):
+            A map for gender attribute lookups.
+        opinions (Dict[OpinionTopicID, Opinion]):
+            A dictionary of opinions.
+            The key is an OpinionTopicID, the value is an Opinion object.
     """
 
     def __init__(self, year: int = 2026, place: str = "Earth",
-        opinions: Dict[OpinionTopicID, Opinion] = None,
-        gender_map: GenderMap = None):
+        gender_map: GenderMap = None,
+        opinions: Dict[OpinionTopicID, Opinion] = None):
         """
-        Initialize an OpinionatedEnvironment.
+        Initialize.
 
         Args:
             year (int):
                 The current year in the simulation.
             place (str):
                 The name of the place or environment.
+            gender_map (GenderMap):
+                A GenderMap instance for gender attribute lookups.
             opinions (Dict[OpinionTopicID, Opinion]):
                 A dictionary of opinions, where the key is an OpinionTopicID and the value is an Opinion object.
                 This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
-            gender_map (GenderMap):
-                A GenderMap instance for gender attribute lookups.
+            
         """
-        super().__init__(year=year, place=place)
+        self.year = year
+        self.place = place
+        self.agents_active: Dict = {}
+        self.agents_inactive: Dict = {}
+        self.groups_active: Dict = {}
+        self.groups_inactive: Dict = {}
         self.opinions = opinions if opinions is not None else {}
         self.gender_map = gender_map if gender_map is not None else GenderMap()
 
@@ -50,10 +70,11 @@ class Environment():
         Return:
             A string representation.
         """
-        return f"Environment(year={self.year}, place='{self.place}', " \
+        class_name = self.__class__.__name__
+        return f"{class_name}: year={self.year}, place='{self.place}', " \
                f"agents_active={len(self.agents_active)}, agents_inactive={len(self.agents_inactive)}, " \
                f"groups_active={len(self.groups_active)}, groups_inactive={len(self.groups_inactive)}, " \
-               f"opinions={len(self.opinions)})"
+               f"opinions={len(self.opinions)}, gender_map={self.gender_map}"
 
     def __repr__(self):
         """
@@ -67,47 +88,35 @@ class Nation(Environment):
     An Environment representing a nation.
     Can be extended with nation-specific attributes and methods.
     
+    .. note::
+            Inherits all attributes from :class:`Environment`.
+
     Attributes:
-        nation (str): The name of the nation (e.g., "United Kingdom").
-        citizens (Group): A group of Person agents representing the citizens of the nation.
-        aliens (Group): A group of Person agents representing the aliens in the nation.
+        citizens (Group):
+            A group of Person agents representing the citizens of the nation.
+        aliens (Group):
+            A group of Person agents representing the aliens in the nation.
     """
     
     def __init__(self, year: int = 2026, place: str = "Earth", 
-        opinions: Dict[OpinionTopicID, Opinion] = None, nation: str = "United Kingdom"):
+        gender_map: GenderMap = None, opinions: Dict[OpinionTopicID, Opinion] = None, nation: str = "United Kingdom"):
         """
-        Initialize a Nation environment.
+        Initialize.
         Args:
             year (int):
                 The current year in the simulation.
             place (str):
-                The name of the place or environment.
+                The name of the nation.
+            gender_map (GenderMap):
+                A GenderMap instance for gender attribute lookups.
             opinions (Dict[OpinionTopicID, Opinion]):
                 A dictionary of opinions, where the key is an OpinionTopicID and the value is an Opinion object.
                 This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
-            gender_map (GenderMap):
-                A GenderMap instance for gender attribute lookups.
-
+        
         """
-        super().__init__(year=year, place=place, opinions=opinions)
-        self.nation = nation
-        self.citizens = Group()  # type: Group
-        self.groups_active.append(self.citizens)  # type: ignore
-        self.aliens = Group()  # type: Group
-        self.groups_active.append(self.aliens)  # type: ignore
-
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"Nation(nation='{self.nation}', year={self.year}, place='{self.place}', " \
-               f"agents_active={len(self.agents_active)}, agents_inactive={len(self.agents_inactive)}, " \
-               f"groups_active={len(self.groups_active)}, groups_inactive={len(self.groups_inactive)}, opinions={len(self.opinions)})"
-
-    def __repr__(self):
-        """
-        Return:
-            An official string representation.
-        """
-        return self.__str__()
+        super().__init__(year=year, place=place, gender_map=gender_map, opinions=opinions)
+        from gabm.abm.group import Group, GroupID
+        self.citizens = Group(GroupID(1), name="Citizens")
+        self.groups_active[self.citizens.id] = self.citizens
+        self.aliens = Group(GroupID(2), name="Aliens")
+        self.groups_active[self.aliens.id] = self.aliens
