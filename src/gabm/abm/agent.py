@@ -19,9 +19,13 @@ from gabm.core.id import GABMID
 from gabm.abm.attributes.ethnicity import EthnicityID, Ethnicity, EthnicityMap
 from gabm.abm.attributes.gender import GenderID
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, Opinion
+from gabm.abm.attributes.region import RegionID, RegionMap
+from gabm.abm.attributes.education import EducationID, Education, EducationMap
+from gabm.abm.attributes.employment import EmploymentID, EmploymentMap
+from gabm.abm.attributes.income import IncomeID, IncomeMap
 # TYPE_CHECKING is used to avoid circular imports.
 if TYPE_CHECKING:
-    from gabm.abm.environment import Environment
+    from gabm.abm.environment import Environment, Nation
     from gabm.abm.group import Group, OpinionatedGroup
 
 class AgentID(GABMID):
@@ -371,19 +375,57 @@ class Citizen(Person):
 
     .. note::
         Inherits all attributes from :class:`Person`.
+
+    Attributes:
+        region_id (RegionID):
+            The agent's region, represented as a RegionID.
+        education_id (EducationID):
+            The agent's education level, represented as an EducationID.
+        ethnicity_id (EthnicityID):
+            The agent's ethnicity, represented as an EthnicityID.
+        employment_id (EmploymentID):
+            The agent's employment status, represented as an EmploymentID.
+        income_id (IncomeID):
+            The agent's income level, represented as an IncomeID.
     """
     def __init__(self, citizen_id: CitizenID, environment: "Nation",
-        year_of_birth: int = None, gender_id: GenderID = None,
-        opinions: dict = None):
+        year_of_birth: int = None,
+        gender_id: GenderID = None,
+        opinions: dict = None,
+        region_id: int = None,
+        education_id: int = None,
+        ethnicity_id: int = None,
+        employment_id: int = None,
+        income_id: int = None):
         """
         Initialize.
 
         Args:
-            citizen_id: Unique identifier for the citizen.
-            environment: The Nation the citizen belongs to.
-            year_of_birth: Year of birth (int).
-            gender_id: The ID of the gender attributed.
-            opinions: A dictionary of opinions, where keys are OpinionTopicIDs and values are Opinion objects.
+            citizen_id (AgentID):
+                Unique identifier for the citizen.
+            environment (Nation):
+                The Nation the citizen belongs to.
+            year_of_birth (int):
+                Year of birth.
+            gender_id (GenderID):
+                The ID of the gender attributed.
+            opinions (dict):
+                A dictionary of opinions, where keys are OpinionTopicIDs and values are Opinion objects.
+            region_id (RegionID):
+                The Id RegionID.
+            education_id (EducationID):
+                The agent's education level, represented as an EducationID.
+            ethnicity_id (EthnicityID):
+                The agent's ethnicity, represented as an EthnicityID.
+            employment_id (EmploymentID):
+                The agent's employment status, represented as an EmploymentID.
+            income_id (IncomeID):
+                The agent's income level, represented as an IncomeID.
         """
         super().__init__(citizen_id, environment, year_of_birth=year_of_birth,
             gender_id=gender_id, opinions=opinions)
+        self.region_id=region_id
+        self.education_id=education_id
+        self.ethnicity_id=ethnicity_id
+        self.employment_id=employment_id
+        self.income_id=income_id
