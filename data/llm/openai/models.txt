@@ -12,25 +12,25 @@ Model ID: gpt-3.5-turbo
   Owned by: openai
   Created: 1677610602
 
+Model ID: gpt-5.4-mini
+  Owned by: system
+  Created: 1773451123
+
 Model ID: gpt-5.4
   Owned by: system
   Created: 1772691852
 
-Model ID: gpt-5.3-chat-latest
+Model ID: gpt-5.4-nano-2026-03-17
   Owned by: system
-  Created: 1772236571
+  Created: 1773450837
 
-Model ID: gpt-5.4-2026-03-05
+Model ID: gpt-5.4-nano
   Owned by: system
-  Created: 1772654062
+  Created: 1773450870
 
-Model ID: gpt-5.4-pro
+Model ID: gpt-5.4-mini-2026-03-17
   Owned by: system
-  Created: 1772659601
-
-Model ID: gpt-5.4-pro-2026-03-05
-  Owned by: system
-  Created: 1772659657
+  Created: 1773451076
 
 Model ID: davinci-002
   Owned by: system
@@ -459,6 +459,22 @@ Model ID: gpt-4o-search-preview
 Model ID: gpt-4o-search-preview-2025-03-11
   Owned by: system
   Created: 1771905621
+
+Model ID: gpt-5.3-chat-latest
+  Owned by: system
+  Created: 1772236571
+
+Model ID: gpt-5.4-2026-03-05
+  Owned by: system
+  Created: 1772654062
+
+Model ID: gpt-5.4-pro
+  Owned by: system
+  Created: 1772659601
+
+Model ID: gpt-5.4-pro-2026-03-05
+  Owned by: system
+  Created: 1772659657
 
 Model ID: gpt-3.5-turbo-16k
   Owned by: openai-internal

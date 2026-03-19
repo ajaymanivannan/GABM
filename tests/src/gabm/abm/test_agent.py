@@ -11,7 +11,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import pytest
 from unittest.mock import Mock
 # Local imports
-from gabm.abm.environment import Environment
+from gabm.abm.environment import Environment, Nation
 from gabm.abm.agent import AgentID, Agent, PersonID, Person, CitizenID, Citizen
 from gabm.abm.attributes.gender import GenderID, GenderMap
 
@@ -81,7 +81,7 @@ def test_person_age_and_gender():
 
 # --- Citizen Tests ---
 def test_citizen_creation():
-    environment = Environment(2026, place="Earth", gender_map=GenderMap())
+    environment = Nation(2026, place="Earth", gender_map=GenderMap())
     c = Citizen(CitizenID(7), environment=environment)
     assert isinstance(c, Person)
 

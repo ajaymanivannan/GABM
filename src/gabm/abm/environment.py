@@ -13,6 +13,11 @@ from gabm.abm.agent import Agent
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, Opinion
 from gabm.abm.group import Group
 from gabm.abm.attributes.gender import GenderMap
+from gabm.abm.attributes.region import RegionMap
+from gabm.abm.attributes.education import EducationMap
+from gabm.abm.attributes.ethnicity import EthnicityMap
+from gabm.abm.attributes.employment import EmploymentMap
+from gabm.abm.attributes.income import IncomeMap
 
 class Environment():
     """
@@ -96,10 +101,29 @@ class Nation(Environment):
             A group of Person agents representing the citizens of the nation.
         aliens (Group):
             A group of Person agents representing the aliens in the nation.
+        region_map (UKRegionMap):
+            A UKRegionMap instance for region attribute lookups.
+        education_map (SurveyEducationMap):
+            A SurveyEducationMap instance for education attribute lookups.
+        ethnicity_map (SurveyEthnicityMap):
+            A SurveyEthnicityMap instance for ethnicity attribute lookups.
+        employment_map (SurveyEmploymentMap):
+            A SurveyEmploymentMap instance for employment attribute lookups.
+        income_map (SurveyIncomeMap):
+            A SurveyIncomeMap instance for income attribute lookups.
+        nation (str):
+            The name of the nation.
     """
     
     def __init__(self, year: int = 2026, place: str = "Earth", 
-        gender_map: GenderMap = None, opinions: Dict[OpinionTopicID, Opinion] = None, nation: str = "United Kingdom"):
+        gender_map: GenderMap = None,
+        opinions: Dict[OpinionTopicID, Opinion] = None,
+        region_map: RegionMap = None,
+        education_map: EducationMap = None,
+        ethnicity_map: EthnicityMap = None,
+        employment_map: EmploymentMap = None,
+        income_map: IncomeMap = None,
+        nation: str = None):
         """
         Initialize.
         Args:
@@ -109,12 +133,25 @@ class Nation(Environment):
                 The name of the nation.
             gender_map (GenderMap):
                 A GenderMap instance for gender attribute lookups.
+            region_map (RegionMap):
+                A RegionMap instance for region attribute lookups.
+            education_map (EducationMap):
+                An EducationMap instance for education attribute lookups.
+            ethnicity_map (EthnicityMap):
+                An EthnicityMap instance for ethnicity attribute lookups.
             opinions (Dict[OpinionTopicID, Opinion]):
                 A dictionary of opinions, where the key is an OpinionTopicID and the value is an Opinion object.
                 This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
-        
+            nation (str):
+                The name of the nation.
         """
         super().__init__(year=year, place=place, gender_map=gender_map, opinions=opinions)
+        self.region_map = region_map if region_map is not None else RegionMap()
+        self.education_map = education_map if education_map is not None else EducationMap()
+        self.ethnicity_map = ethnicity_map if ethnicity_map is not None else EthnicityMap()
+        self.employment_map = employment_map if employment_map is not None else EmploymentMap()
+        self.income_map = income_map if income_map is not None else IncomeMap()
+        self.nation = nation
         from gabm.abm.group import Group, GroupID
         self.citizens = Group(GroupID(1), name="Citizens")
         self.groups_active[self.citizens.id] = self.citizens

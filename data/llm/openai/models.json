@@ -18,32 +18,32 @@
     "owned_by": "openai"
   },
   {
+    "id": "gpt-5.4-mini",
+    "created": 1773451123,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
     "id": "gpt-5.4",
     "created": 1772691852,
     "object": "model",
     "owned_by": "system"
   },
   {
-    "id": "gpt-5.3-chat-latest",
-    "created": 1772236571,
+    "id": "gpt-5.4-nano-2026-03-17",
+    "created": 1773450837,
     "object": "model",
     "owned_by": "system"
   },
   {
-    "id": "gpt-5.4-2026-03-05",
-    "created": 1772654062,
+    "id": "gpt-5.4-nano",
+    "created": 1773450870,
     "object": "model",
     "owned_by": "system"
   },
   {
-    "id": "gpt-5.4-pro",
-    "created": 1772659601,
-    "object": "model",
-    "owned_by": "system"
-  },
-  {
-    "id": "gpt-5.4-pro-2026-03-05",
-    "created": 1772659657,
+    "id": "gpt-5.4-mini-2026-03-17",
+    "created": 1773451076,
     "object": "model",
     "owned_by": "system"
   },
@@ -686,6 +686,30 @@
   {
     "id": "gpt-4o-search-preview-2025-03-11",
     "created": 1771905621,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-5.3-chat-latest",
+    "created": 1772236571,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-5.4-2026-03-05",
+    "created": 1772654062,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-5.4-pro",
+    "created": 1772659601,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-5.4-pro-2026-03-05",
+    "created": 1772659657,
     "object": "model",
     "owned_by": "system"
   },
